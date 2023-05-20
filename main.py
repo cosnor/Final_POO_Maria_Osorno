@@ -4,14 +4,15 @@ from src.personal import *
 from src.turno_horario import *
 from src.reciclaje import *
 
-
+# Se crea el objeto empresa
 trashCity = Empresa()
 print("----------------------------------")
 print("Bienvenido a Trash City")
 print("----------------------------------")
 
-#Se crea el observable del tipo RegistroTurnos
+#Se crea el objeto registro de turnos que funciona de observable
 registro_turnos = RegistroTurnos()
+
 #Se agregan los camiones a la empresa y sus rutas
 for i in range (0,5):
     numero_placa = random.randint(100, 999)
@@ -20,8 +21,7 @@ for i in range (0,5):
 # Se agregan los observadores al registro de turnos
 registro_turnos.set_observadores(trashCity.camiones)
 
-# Agregar personal a la empresa 
-
+# Se agrega personal a la empresa 
 print("\nInformación de los camiones: \n")
 print("----------------------------------")
 
@@ -39,12 +39,10 @@ for i in range(0, 5):
     
 print("----------------------------------")
 
-#Se define el centro de acopio
-
+#Se instancia el centro de acopio
 tc_acopio = CentroAcopio()
     
 #Se asignan los turnos y con ello, los horarios y el equipo de trabajo
-
 for indice, camion in enumerate(trashCity.camiones):
     
     HORARIOS = [["6:00", "12:00"], ["12:00", "18:00"], ["18:00", "24:00"]]
@@ -54,16 +52,19 @@ for indice, camion in enumerate(trashCity.camiones):
     LISTA_AYUDANTES = []
     i = 0
     for ayudante in trashCity.personal.ayudantes:
+        #Validación para no asignar a alguien ya asignado a otro camión
         if ayudante.estado == "Sin asignar":
             ayudante.estado = "Asignado"
             ayudante.establecer_asignado()
             LISTA_AYUDANTES.append(ayudante)
             i+=1
+            # Se asignan dos ayudantes por camión
             if i == 2:
                 break
 
     camion.turno.asignar_equipo(trashCity.personal.conductores[indice], LISTA_AYUDANTES)
     trashCity.personal.conductores[indice].establecer_asignado()
+    #Output
     print("|")
     print(f"Se ha agregado el turno al camión con placa {camion.placa}")
     print(f"El equipo de trabajo está conformado por: Conductor ID {trashCity.personal.conductores[indice].id} y los ayudantes ID {LISTA_AYUDANTES[0].id} y {LISTA_AYUDANTES[1].id}")
@@ -74,6 +75,7 @@ print("----------------------------------")
 print("Asignación de rutas")
 print("----------------------------------")
 
+#Se crean las rutas de los camiones
 for camion in trashCity.camiones:
     camion.ruta.crear_rutas()
     print(f"El camión con placa {camion.placa} tiene la siguiente ruta: ")
@@ -85,13 +87,12 @@ print("----------------------------------")
 print("Cargas por punto de los camiones en su turno")
 print("----------------------------------")
 
-
+#Se cargan los camiones en cada punto de su ruta
 for camion in trashCity.camiones: 
     print("")
     print(f"Para el camión con placa {camion.placa} :")
     print(f"_______________________________")
     
-
     for punto in camion.ruta.puntos:
         carga = random.randint(1, 50)
         camion.cargar(carga)
@@ -103,6 +104,7 @@ print("Descarga de los camiones en el centro de acopio por cambio de turno")
 print("----------------------------------")
 
 #Fin de turno
+#Se descargan los camiones en el centro de acopio
 registro_turnos.cambio_diario()
 tc_acopio.reciclar()
 

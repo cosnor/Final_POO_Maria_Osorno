@@ -1,6 +1,6 @@
 from __future__ import annotations
 import random
-    
+
 class CentroAcopio: 
     def __init__(self) -> None:
         self.material_reciente = 0
@@ -11,21 +11,23 @@ class CentroAcopio:
         self.residuos_orgánicos_actual = 0
         self.registro_diario = []
     
+    #Método para buscar la cantidad de vidrio recolectada en un día
     def buscar_vidrio(self, dia):
         if dia > len(self.registro_diario):
             return "Ingrese un día válido"
         else:
             return f"La cantidad de vidrio recolectada en el día {dia} fue de  {self.registro_diario[dia-1]} toneladas"
-        
+    
+    #Método para recibir la carga de los camiones
     def recibir_material(self, carga): 
         self.material_reciente +=  carga
         
-        
+    #Método para reciclar el material recibido
     def reciclar(self): 
         partes = []
         suma_actual = 0
 
-        # Generar cuatro partes aleatorias
+        #Algoritmo para generar las cantidades de material recogido por tipo
         for _ in range(4):
             parte = random.randint(1, self.material_reciente - suma_actual - 4)
             partes.append(parte)
@@ -42,7 +44,6 @@ class CentroAcopio:
         print (f"Al final del turno, se reciclaron {self.vidrio_actual} ton de vidrio, {self.papel_actual} ton de papel, {self.plástico_actual} ton de plástico, {self.metal_actual} ton de metal y {self.residuos_orgánicos_actual} ton de residuos orgánicos") 
         
         #Se crea el registro del día de vidrio
-    
         self.registro_diario.append(self.vidrio_actual)
         
         #Se reinician las cantidades de material reciclado por el día

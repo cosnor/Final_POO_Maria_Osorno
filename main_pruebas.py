@@ -59,12 +59,6 @@ class TestTrashCity(unittest.TestCase):
             camion.descargar(tc_acopio)
             self.assertEqual(camion.capacidad_carga, 0)
     
-    def test_busqueda_vidrio_centro_acopio(self):
-        tc_acopio = CentroAcopio()
-        
-        for dia in range(1, 8):
-            cantidad_vidrio = tc_acopio.buscar_vidrio(dia)
-            # Realizar las aserciones correspondientes
     
 if __name__ == '__main__':
     unittest.main()

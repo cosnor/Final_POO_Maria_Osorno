@@ -9,30 +9,24 @@ Objetivos:
 
 2. Prueba de asignación de personal:
 
+Objetivos: 
 > Verificar que se agregue correctamente el personal a la empresa y se asigne a los camiones a través de turnos.
 > Comprobar que se asignen los conductores y ayudantes de manera adecuada, teniendo en cuenta las restricciones de asignación.
 
 3. Prueba de creación de rutas:
 
+Objetivos: 
 > Verificar que se creen las rutas correctamente para cada camión.
 > Comprobar que los puntos de la ruta sean válidos y se asignen correctamente a cada camión.
 
 4. Prueba de carga de basura en los puntos de la ruta:
 
+Objetivo: 
 > Comprobar que las cargas de basura estén dentro del rango esperado y sean aleatorias.
 
 5. Prueba de descarga en el centro de acopio:
 
+Objetivos: 
 > Verificar que los camiones descarguen la basura en el centro de acopio al finalizar su turno.
 > Comprobar que la descarga se realice correctamente y se registre la cantidad de basura descargada.
 
-
-6. Prueba de búsqueda de vidrio en el centro de acopio:
-
-> Verificar que se pueda buscar la cantidad de vidrio reciclado en un día específico del centro de acopio.
-> Comprobar que la búsqueda devuelva la información correcta y esté en el formato esperado.
-
-7. Prueba de cambio diario de turnos y reciclaje en el centro de acopio:
-
-> Verificar que al realizar el cambio diario de turnos se actualicen correctamente los registros y se realice el reciclaje en el centro de acopio.
-> Comprobar que se realicen las operaciones de cambio y reciclaje adecuadamente y se reflejen los cambios correspondientes.
