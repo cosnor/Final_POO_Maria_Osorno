@@ -1,0 +1,31 @@
+ 
+La empresa de manejo de residuos “TrashCity” necesita un sistema de información
+para administrar su operación. El primer servicio de la empresa consiste en la
+recolección de los residuos de la ciudad: camiones de la empresa recorren la ciudad
+en rutas preestablecidas tomando los residuos dispuestos por los usuarios. Una ruta
+contiene la serie de puntos geográficos (latitud, longitud) por donde debe pasar es
+camión.
+Cada camión cuenta con un conductor y dos asistentes de recolección en un turno. Un turno
+define el recorrido completo de un camión y su equipo a recoger residuos, en un rango de día
+y hora de inicio y finalización, siguiendo una de las rutas existentes. En el turno se almacena
+la localización geográfica y tiempo en el que pasó en su recorrido.
+Al final de turno, la carga del camión pasa a ser clasificada en un centro de acopio. El
+resultado de la separación se almacena en el sistema asociado al turno: cuántas toneladas
+de vidrio, papel, plástico, metal y residuos orgánicos.
+De los elementos camión y persona se almacena información básica de identificación.
+Para resolver este problema usted debe:
+
+a. Realizar un diagrama de clase UML para representar el modelo de la solución.
+(Criterios de evaluación: Clases necesarias, relaciones adecuadas, uso del estándar,
+estructura que reduce redundancia de información y facilidad de acceso a la
+información)
+
+b. Implemente en Python los métodos que permitan el cálculo de la cantidad de vidrio
+que se recogió en todas las rutas de un día en específico. Asuma que métodos get y
+set de los atributos ya existen, y que clases como LocalDateTime ya existen en el
+sistema. La clase de punto geográfico debe ser definida por en el UML.
+
+c. Implemente un plan de pruebas donde verifique la funcionalidad de su solución para
+este sistema de información.
+Nota: Deberá compartir si solución como un repositorio en git, donde se encuentre todo lo
+necesario para poder ejecutar y así mismo la documentación lo más detallada posible.

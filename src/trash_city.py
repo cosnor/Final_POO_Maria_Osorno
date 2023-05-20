@@ -1,58 +1,45 @@
-from multipledispatch import dispatch
 import random
-
-class TrashCity: 
-    pass
-
-class CentroAcopio: 
-    pass
+from src.personal import RegistroPersonal
+from src.turno_horario import Turno, Horario, Observador
 
 
-    
-class Camion: 
-    def __init__(self, placa: str, ruta) -> None:
-        self.placa = placa
-        self.conductor = None
-        self.ayudantes = []
-        self.ruta = ruta
-
-class RegistroPersonal: 
+class Empresa: 
     def __init__(self) -> None:
-        self.conductores = []
-        self.ayudantes = []
-    
-    @dispatch (int)
-    def agregar_trabajador(self, id:int):
-        self.ayudantes.append(Ayudante(id))
-    
-    @dispatch (int, int)
-    def agregar_trabajador(self, id: int, licencia: int):
-        self.conductores.append(Conductor(id, licencia))
-    
-    def asignar_trabajadores(self): 
-        pass
-    
-    
-class Persona: 
-    def __init__(self, id) -> None:
-        self.id = id
-        self.estado = "Sin asignar"
-    
-    def establecer_asignado(self): 
-        self.estado = "Asignado" 
-    
-class Conductor(Persona): 
-    def __init__(self, id: int, licencia: int) -> None:
-        super.__init__(id)
-        self.licencia = licencia
+        self.camiones = []
+        self.personal = RegistroPersonal()
 
-class Ayudante: 
-    def __init__(self, id) -> None:
-        super.__init__(id)
     
+    def agregar_camion(self, placa, numero_puntos, observable): 
+        self.camiones.append(Camion(placa, Ruta(numero_puntos), observable))
+    
+    def mostrar_camiones(self):
+        for camion in self.camiones: 
+            print(f"Camión con placa {camion.placa}") 
 
-class Turno: 
-    pass
+
+
+class Camion(Observador): 
+    def __init__(self, placa: str, ruta, observable) -> None:
+        super().__init__()
+        self.placa = placa
+        self.ruta = ruta
+        self.turno = None
+        self.registro_turnos = observable
+        self.turno_actual = 0
+        
+    
+    def asignar_turno(self, horario, acopio):
+        self.turno = Turno(horario, acopio) 
+    
+    def cargar(self, carga): 
+        self.turno.cargar(carga)
+    
+        
+    def cambio_turno(self, subject):
+        self.turno.descargar()
+        self.turno_actual = self.registro_turnos.turno_actual
+        self.asignar_turno(self.turno.horario, self.turno.centro_acopio)
+        
 
 class Ruta: 
     def __init__(self, numero_puntos) -> None:
@@ -61,10 +48,12 @@ class Ruta:
     
     def crear_rutas(self): 
         for i in range (0, self.numero_puntos): 
-            latitud = random.randit(0,100) 
-            longitud = random.randit(0,100) 
+            latitud = random.randint(0,100) 
+            longitud = random.randint(0,100) 
             self.puntos.append(PuntoGeografico(latitud, longitud))
+            
         
 class PuntoGeografico: 
     def __init__(self, latitud, longitud) -> None:
-        self.punto = (latitud, longitud)
+        self.latitud = latitud
+        self.longitud = longitud
